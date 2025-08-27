@@ -2,6 +2,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich import box
+import time
 
 console = Console()
 
@@ -12,9 +13,8 @@ def hole():
         width=9,
         height=3,
         box=box.ROUNDED,
-        style="bold #A52A2A",  # brown color in hex
+        style="bold #A52A2A",
     )
-
 
 def mole():
     return Panel(
@@ -25,24 +25,22 @@ def mole():
         style="bold red on white",
     )
 
+def show_grid():
+    # 👉 YOUR ORIGINAL STATIC GRID
+    grid = Table.grid(padding=(1, 4), expand=True)  
+    grid.add_row(hole(), hole(), hole())  
+    grid.add_row(mole(), hole(), mole())  
+    grid.add_row(hole(), mole(), hole())
 
-# Create a centered grid
-grid = Table.grid(padding=(1, 4), expand=True)  # expand lets it stretch
-grid.add_row(hole(), hole(), hole())
-grid.add_row(mole(), hole(), mole())
-grid.add_row(hole(), mole(), hole())
-
-# Wrap the grid inside a centered panel
-game_panel = Panel(
-    grid,
-    title="Whack-a-Mole",
-    box=box.DOUBLE,
-    style="on #FFFDD0",
-    width=70,
-    height=20,
-)
-
-console.print(game_panel, justify="center")  # center in terminal
+    game_panel = Panel(
+        grid,
+        title="Whack-a-Mole",
+        box=box.DOUBLE,
+        style="on #FFFDD0",
+        width=70,
+        height=20,
+    )
+    console.print(game_panel, justify="center")
 
 import random
 
@@ -56,4 +54,5 @@ def random_mole_position():
 print("\nTesting mole randomizer...")
 for i in range(5):  # run 5 times
     pos = random_mole_position()
-    print(f"Test {i+1}: Mole appeared at {pos}")
+    print(f"Test {i+1}: Mole appeared at {pos}")    
+
