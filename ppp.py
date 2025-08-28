@@ -3,7 +3,6 @@ from rich.panel import Panel
 from rich.table import Table
 from rich import box
 
-
 console = Console()
 
 
@@ -45,4 +44,21 @@ game_panel = Panel(
 
 console.print(game_panel, justify="center")  # center in terminal
 
+import random
 
+def random_mole_position():
+    """Return a random (row, col) position for the mole in a 3x3 grid."""
+    row = random.randint(0, 2)  # pick a row: 0, 1, or 2
+    col = random.randint(0, 2)  # pick a column: 0, 1, or 2
+    return (row, col)
+
+#Test the random mole position function
+print("\nTesting mole randomizer...")
+for i in range(5):  # run 5 times
+    pos = random_mole_position()
+    print(f"Test {i+1}: Mole appeared at {pos}")
+
+
+
+
+ 
