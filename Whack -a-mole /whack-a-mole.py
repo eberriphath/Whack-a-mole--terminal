@@ -30,7 +30,7 @@ def make_grid(mole_pos):
 
 def show_grid(mole_pos=None, delay=1):
  
-    with Live(console=console, refresh_per_second=4, screen=False) as live:
+    with Live(console=console, refresh_per_second=1, screen=False) as live:
         if mole_pos is None:  
             mole_pos = random.randint(0, 8)
         game_panel = Panel(
@@ -57,15 +57,12 @@ def play_round(score):
     mole_pos = random.randint(0, 8)
     show_grid(mole_pos)
 
-    move = input("Enter row col: ")
+    move = input("Enter hole number (1-9):")
     try:
-        row, col = map(int, move.split())
-        row -= 1
-        col -= 1
-        chosen_pos = row * 3 + col
+        chosen_pos = int(move) -1
     except:
         
-        return update_score(score, False)
+        return score
 
     hit = chosen_pos == mole_pos
     if hit:
