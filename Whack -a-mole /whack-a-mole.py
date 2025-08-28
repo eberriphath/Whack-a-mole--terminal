@@ -4,9 +4,13 @@ from rich.table import Table
 from rich import box
 from rich.live import Live
 import random, time
+import readchar
+
+#---------------------------------------------------------------------------------------------------------------
 
 console = Console()
 
+#---------------------------------------------------------------------------------------------------------------
 
 def hole():
     return Panel("", width=9, height=3, box=box.ROUNDED, style="bold #A52A2A")
@@ -14,6 +18,7 @@ def hole():
 def mole():
     return Panel("🐹", width=9, height=3, box=box.ROUNDED, style="bold red on white")
 
+#---------------------------------------------------------------------------------------------------------------
 
 def make_grid(mole_pos):
     grid = Table.grid(padding=(1, 4), expand=True)
@@ -27,6 +32,8 @@ def make_grid(mole_pos):
     grid.add_row(cells[3], cells[4], cells[5])
     grid.add_row(cells[6], cells[7], cells[8])
     return grid
+
+#---------------------------------------------------------------------------------------------------------------
 
 def show_grid(mole_pos=None, delay=1):
  
@@ -45,23 +52,26 @@ def show_grid(mole_pos=None, delay=1):
         time.sleep(delay)
     return mole_pos
 
+#---------------------------------------------------------------------------------------------------------------
+
 def update_score(score, hit):
     if hit:
         return score + 1
     else:
         return score
 
-
+#---------------------------------------------------------------------------------------------------------------
 
 def play_round(score):
     mole_pos = random.randint(0, 8)
     show_grid(mole_pos)
 
-    move = input("Enter hole number (1-9):")
+    console.print("Enter hole number (1-9):")
     try:
-        chosen_pos = int(move) -1
+        key = readchar.readkey()
+        chosen_pos = int(key) -1
+
     except:
-        
         return score
 
     hit = chosen_pos == mole_pos
@@ -70,6 +80,8 @@ def play_round(score):
     else:
         console.print(" 0")
     return update_score(score, hit)
+
+#----------------------------------------------------------------------------------------------------------------
 
 def game_loop():
     score = 0
@@ -90,6 +102,8 @@ def game_loop():
         console.print(f"[cyan]Score: {score}[/]")   
 
     console.print(f"[red]Time is up! Final Score: {score}[/]")
+
+#---------------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     game_loop()
