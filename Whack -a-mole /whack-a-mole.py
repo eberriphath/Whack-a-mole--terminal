@@ -71,3 +71,25 @@ def play_round(score):
         console.print(" 0")
     return update_score(score, hit)
 
+def game_loop():
+    score = 0
+    game_time = 40  
+    console.print(f"[yellow]You have {game_time} seconds to play![/]")
+
+    console.print("\n[bold green]Press [S] to start the game")
+    choice = input("==> ").strip().lower()
+    if choice != "s":
+        console.print("[red]INVALID CHOICE[/]")
+        return
+
+    console.print("[yellow]Game started![/]")  
+    start_time = time.time()
+
+    while time.time() - start_time < game_time:
+        score = play_round(score)
+        console.print(f"[cyan]Score: {score}[/]")   
+
+    console.print(f"[red]Time is up! Final Score: {score}[/]")
+
+if __name__ == "__main__":
+    game_loop()
