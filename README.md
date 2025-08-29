@@ -39,5 +39,5 @@ COLLABORATORS.
 1.Naomi Nyagetiria
 2.Paul Machuka
 3.Mohammed Amin
-4.Abdiaziz Ali
+4.Abdihakim Ali
 5.Eber Riphath
