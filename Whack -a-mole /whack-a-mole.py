@@ -21,7 +21,7 @@ def mole():
 #---------------------------------------------------------------------------------------------------------------
 
 def make_grid(mole_pos):
-    grid = Table.grid(padding=(1, 4), expand=True)
+    grid = Table.grid(padding=(1, 4))
     cells = []
     for i in range(9):
         if i == mole_pos:
@@ -35,11 +35,11 @@ def make_grid(mole_pos):
 
 #---------------------------------------------------------------------------------------------------------------
 
-def show_grid(mole_pos=None, delay=1):
+def show_grid(mole_pos=None):
  
-    with Live(console=console, refresh_per_second=1, screen=False) as live:
+    with Live(console=console) as live:
         if mole_pos is None:  
-            mole_pos = random.randint(0, 8)
+            mole_pos = random.choice(range(9)
         game_panel = Panel(
             make_grid(mole_pos),
             title="Whack-a-Mole",
@@ -49,7 +49,7 @@ def show_grid(mole_pos=None, delay=1):
             height=20,
         )
         live.update(game_panel)
-        time.sleep(delay)
+        
     return mole_pos
 
 #---------------------------------------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ def update_score(score, hit):
 #---------------------------------------------------------------------------------------------------------------
 
 def play_round(score):
-    mole_pos = random.randint(0, 8)
+    mole_pos = random.choice(range(9)
     show_grid(mole_pos)
 
     console.print("Enter hole number (1-9):")
@@ -89,7 +89,7 @@ def game_loop():
     console.print(f"[yellow]You have {game_time} seconds to play![/]")
 
     console.print("\n[bold green]Press [S] to start the game")
-    choice = input("==> ").strip().lower()
+    choice = input("==> ").lower()
     if choice != "s":
         console.print("[red]INVALID CHOICE[/]")
         return
